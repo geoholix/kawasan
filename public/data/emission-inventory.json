@@ -1,0 +1,31 @@
+{
+  "name": "Inventaris emisi CO2e DKI Jakarta (estimasi bottom-up)",
+  "year": 2024,
+  "status": "ASUMSI — ganti dengan data resmi (Inventarisasi GRK DKI Jakarta, BPS, PLN, DLH) sebelum dipakai untuk analisis.",
+  "emissionFactors": {
+    "gasoline_kgCO2_per_litre": 2.31,
+    "diesel_kgCO2_per_litre": 2.68,
+    "grid_tCO2_per_MWh": 0.87,
+    "naturalGas_kgCO2_per_m3": 1.9,
+    "lpg_kgCO2_per_kg": 2.98,
+    "waste_tCO2e_per_tonne": 0.5
+  },
+  "activity": {
+    "vehicles": [
+      { "id": "motorcycle", "label": "Sepeda motor", "count": 17000000, "kmPerYear": 6000, "kmPerLitre": 40, "fuel": "gasoline", "evKwhPerKm": 0.035 },
+      { "id": "car", "label": "Mobil penumpang", "count": 3800000, "kmPerYear": 12000, "kmPerLitre": 11, "fuel": "gasoline", "evKwhPerKm": 0.15 },
+      { "id": "heavy", "label": "Bus & truk", "count": 750000, "kmPerYear": 20000, "kmPerLitre": 5, "fuel": "diesel", "evKwhPerKm": 1.1 }
+    ],
+    "electricity_MWh": 33000000,
+    "industryNaturalGas_m3": 1200000000,
+    "residentialLpg_kg": 110000000,
+    "waste_tonnesPerDay": 7500
+  },
+  "zones": [
+    { "id": "jakpus", "name": "Jakarta Pusat", "latitude": -6.1805, "longitude": 106.8284, "population": 1100000, "shares": { "electricity": 0.22, "industry": 0.07 } },
+    { "id": "jakut", "name": "Jakarta Utara", "latitude": -6.1384, "longitude": 106.8635, "population": 1800000, "shares": { "electricity": 0.14, "industry": 0.3 } },
+    { "id": "jakbar", "name": "Jakarta Barat", "latitude": -6.1683, "longitude": 106.7588, "population": 2500000, "shares": { "electricity": 0.2, "industry": 0.25 } },
+    { "id": "jaksel", "name": "Jakarta Selatan", "latitude": -6.2615, "longitude": 106.8106, "population": 2300000, "shares": { "electricity": 0.26, "industry": 0.08 } },
+    { "id": "jaktim", "name": "Jakarta Timur", "latitude": -6.225, "longitude": 106.9004, "population": 3100000, "shares": { "electricity": 0.18, "industry": 0.3 } }
+  ]
+}

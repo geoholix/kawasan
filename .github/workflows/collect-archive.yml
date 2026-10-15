@@ -1,0 +1,41 @@
+name: Collect air-quality archive
+
+on:
+  schedule:
+    - cron: "17 */6 * * *" # every 6 hours; each run re-fetches the last 3 days, so a missed run is backfilled
+  workflow_dispatch:
+    inputs:
+      past_days:
+        description: "Days to (back)fill, 1-92"
+        default: "3"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: collect-archive
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/collect-archive.mjs "${{ inputs.past_days || '3' }}"
+        env:
+          OPENAQ_API_KEY: ${{ secrets.OPENAQ_API_KEY }}
+          OPENAQ_LOCATIONS: ${{ vars.OPENAQ_LOCATIONS }}
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/data/archive
+          if git diff --cached --quiet; then
+            echo "No changes"
+          else
+            git commit -m "Update air-quality archive"
+            git push
+          fi

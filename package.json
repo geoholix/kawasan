@@ -1,0 +1,27 @@
+{
+  "name": "peta-kawasan",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Peta kawasan SCBD & PIK — ArcGIS Maps SDK for JavaScript + Calcite, 3D/2D",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "postinstall": "node scripts/patch-ai-components.mjs"
+  },
+  "dependencies": {
+    "@arcgis/ai-components": "^5.1.27",
+    "@arcgis/core": "^5.1.26",
+    "@arcgis/map-components": "^5.1.26",
+    "@esri/calcite-components": "^5.1.2",
+    "three": "^0.186.1",
+    "web-ifc": "^0.0.78"
+  },
+  "devDependencies": {
+    "@types/three": "^0.186.0",
+    "typescript": "~5.9",
+    "vite": "^7.3.6"
+  }
+}

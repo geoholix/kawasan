@@ -1,0 +1,12 @@
+{
+  "status": "ASUMSI — nilai serapan CO2 dan PM2.5 per pohon bervariasi menurut umur, ukuran tajuk, dan kondisi tapak. Ganti dengan data penelitian lokal (mis. KLHK, IPB, Dinas Pertamanan DKI) sebelum dipakai untuk analisis.",
+  "species": [
+    { "id": "trembesi", "name": "Trembesi", "latin": "Samanea saman", "co2KgPerYear": 60, "pm25GramPerYear": 90, "heightM": 18, "crownM": 20, "maturityYears": 15 },
+    { "id": "angsana", "name": "Angsana", "latin": "Pterocarpus indicus", "co2KgPerYear": 40, "pm25GramPerYear": 60, "heightM": 15, "crownM": 12, "maturityYears": 12 },
+    { "id": "mahoni", "name": "Mahoni", "latin": "Swietenia macrophylla", "co2KgPerYear": 45, "pm25GramPerYear": 55, "heightM": 20, "crownM": 10, "maturityYears": 15 },
+    { "id": "beringin", "name": "Beringin", "latin": "Ficus benjamina", "co2KgPerYear": 50, "pm25GramPerYear": 80, "heightM": 16, "crownM": 16, "maturityYears": 15 },
+    { "id": "ketapang-kencana", "name": "Ketapang kencana", "latin": "Terminalia mantaly", "co2KgPerYear": 15, "pm25GramPerYear": 25, "heightM": 10, "crownM": 7, "maturityYears": 8 },
+    { "id": "tabebuya", "name": "Tabebuya", "latin": "Handroanthus chrysotrichus", "co2KgPerYear": 12, "pm25GramPerYear": 20, "heightM": 8, "crownM": 6, "maturityYears": 8 },
+    { "id": "pucuk-merah", "name": "Pucuk merah", "latin": "Syzygium myrtifolium", "co2KgPerYear": 5, "pm25GramPerYear": 10, "heightM": 4, "crownM": 3, "maturityYears": 5 }
+  ]
+}

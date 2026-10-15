@@ -1,0 +1,36 @@
+// Register only the web components the app uses (keeps the bundle small).
+import "@esri/calcite-components/components/calcite-action";
+import "@esri/calcite-components/components/calcite-action-bar";
+import "@esri/calcite-components/components/calcite-action-group";
+import "@esri/calcite-components/components/calcite-block";
+import "@esri/calcite-components/components/calcite-button";
+import "@esri/calcite-components/components/calcite-chip";
+import "@esri/calcite-components/components/calcite-icon";
+import "@esri/calcite-components/components/calcite-input-date-picker";
+import "@esri/calcite-components/components/calcite-input-number";
+import "@esri/calcite-components/components/calcite-label";
+import "@esri/calcite-components/components/calcite-option-group";
+import "@esri/calcite-components/components/calcite-input-text";
+import "@esri/calcite-components/components/calcite-list";
+import "@esri/calcite-components/components/calcite-list-item";
+import "@esri/calcite-components/components/calcite-loader";
+import "@esri/calcite-components/components/calcite-navigation";
+import "@esri/calcite-components/components/calcite-navigation-logo";
+import "@esri/calcite-components/components/calcite-notice";
+import "@esri/calcite-components/components/calcite-option";
+import "@esri/calcite-components/components/calcite-panel";
+import "@esri/calcite-components/components/calcite-scrim";
+import "@esri/calcite-components/components/calcite-segmented-control";
+import "@esri/calcite-components/components/calcite-segmented-control-item";
+import "@esri/calcite-components/components/calcite-select";
+import "@esri/calcite-components/components/calcite-shell";
+import "@esri/calcite-components/components/calcite-shell-panel";
+import "@esri/calcite-components/components/calcite-slider";
+import "@esri/calcite-components/components/calcite-switch";
+
+import "@arcgis/map-components/components/arcgis-scene";
+import "@arcgis/map-components/components/arcgis-zoom";
+import "@arcgis/map-components/components/arcgis-navigation-toggle";
+import "@arcgis/map-components/components/arcgis-compass";
+import "@arcgis/map-components/components/arcgis-home";
+import "@arcgis/map-components/components/arcgis-bookmarks";

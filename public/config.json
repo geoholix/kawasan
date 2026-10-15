@@ -1,0 +1,120 @@
+{
+  "$schema": "./config.schema.json",
+
+  "app": {
+    "title": "Peta Kawasan SCBD & PIK",
+    "subtitle": "Digital twin kawasan & kualitas udara Jakarta",
+    "theme": "auto",
+    "viewMode": "3d"
+  },
+
+  "camera": { "longitude": 106.8115, "latitude": -6.234, "z": 650, "heading": 0, "tilt": 62 },
+
+  "kawasan": {
+    "webmapId": "e8ff91a9c03d46bd995646e06438faaf",
+    "portalUrl": "https://tiger.maps.arcgis.com",
+    "fallbackBasemap2d": "topo-vector",
+    "layerOffset3d": 2,
+    "webmapLayers": { "SCBDPIK": true },
+    "areas": [
+      {
+        "id": "scbd",
+        "name": "SCBD",
+        "description": "Sudirman Central Business District, Jakarta Selatan",
+        "center": [106.8115, -6.2265],
+        "extent": [106.8025, -6.2365, 106.8205, -6.2165],
+        "camera": { "offsetLat": 0.0075, "z": 650, "tilt": 62, "heading": 0 }
+      },
+      {
+        "id": "pik",
+        "name": "PIK",
+        "description": "Pantai Indah Kapuk, Jakarta Utara",
+        "center": [106.742, -6.109],
+        "extent": [106.715, -6.1255, 106.77, -6.0925],
+        "camera": { "offsetLat": 0.014, "z": 1600, "tilt": 60, "heading": 0 }
+      }
+    ]
+  },
+
+  "layers": {
+    "buildings": true,
+    "surface": true,
+    "stations": true,
+    "wind-flow": false,
+    "wind": false,
+    "trees": false,
+    "model-import": true,
+    "space-time-cube": false,
+    "emissions": false,
+    "atmosphere": false,
+    "daylight": false
+  },
+
+  "widgets": {
+    "enabled": ["bookmarks", "assistant", "add-data", "chart", "weather", "wind", "trees", "trend", "emissions", "layers", "about", "summary"],
+    "open": "bookmarks",
+    "timelineDock": true
+  },
+
+  "time": {
+    "mode": "historical",
+    "indicator": "pm2_5",
+    "speed": 4,
+    "realtimeRefreshMinutes": 15,
+    "maxHistoricalDays": 31
+  },
+
+  "basemaps": {
+    "dark": "dark-gray-3d",
+    "light": "gray-3d",
+    "fallbackDark": "dark-gray-vector",
+    "fallbackLight": "gray-vector",
+    "options": [
+      { "id": "dark-gray-3d", "label": "Dark Gray 3D" },
+      { "id": "gray-3d", "label": "Light Gray 3D" },
+      { "id": "navigation-dark-3d", "label": "Navigasi gelap 3D" },
+      { "id": "navigation-3d", "label": "Navigasi 3D" },
+      { "id": "streets-3d", "label": "Streets 3D" },
+      { "id": "topo-3d", "label": "Topografi 3D" },
+      { "id": "osm-3d", "label": "OpenStreetMap 3D" },
+      { "id": "satellite", "label": "Citra satelit (2D + bangunan OSM)" },
+      { "id": "dark-gray-vector", "label": "Dark Gray 2D (+ bangunan OSM)" }
+    ]
+  },
+
+  "buildings": { "type": "portal-item", "id": "c444b24b184c4523a5dc96248bfea4e1" },
+  "buildingsFallback": { "type": "portal-item", "id": "ca0470dbbddb4db28bad74ed39949e25" },
+
+  "assistant": {
+    "heading": "Asisten Kawasan",
+    "description": "Jelajahi peta SCBD & PIK dengan bahasa alami",
+    "entryMessage": "Saya bisa membawa Anda ke SCBD atau PIK, zoom ke layer, dan menjawab pertanyaan tentang data kawasan.",
+    "suggestedPrompts": ["Pergi ke SCBD", "Pergi ke PIK", "Berapa jumlah fitur pada layer SCBDPIK?"]
+  },
+
+  "data": {
+    "useMockData": false
+  },
+
+  "stations": [
+    { "id": "dki1", "shortName": "DKI1", "name": "DKI1 Bundaran HI", "kind": "spku", "district": "Jakarta Pusat", "latitude": -6.1949, "longitude": 106.823 },
+    { "id": "dki2", "shortName": "DKI2", "name": "DKI2 Kelapa Gading", "kind": "spku", "district": "Jakarta Utara", "latitude": -6.1536, "longitude": 106.9106 },
+    { "id": "dki3", "shortName": "DKI3", "name": "DKI3 Jagakarsa", "kind": "spku", "district": "Jakarta Selatan", "latitude": -6.3574, "longitude": 106.803 },
+    { "id": "dki4", "shortName": "DKI4", "name": "DKI4 Lubang Buaya", "kind": "spku", "district": "Jakarta Timur", "latitude": -6.2887, "longitude": 106.9093 },
+    { "id": "dki5", "shortName": "DKI5", "name": "DKI5 Kebon Jeruk", "kind": "spku", "district": "Jakarta Barat", "latitude": -6.2074, "longitude": 106.753 },
+    { "id": "usemb-c", "shortName": "USE-C", "name": "US Embassy Jakarta Central", "kind": "embassy", "district": "Jakarta Pusat", "latitude": -6.1822, "longitude": 106.8342 },
+    { "id": "usemb-s", "shortName": "USE-S", "name": "US Embassy Jakarta South", "kind": "embassy", "district": "Jakarta Selatan", "latitude": -6.2361, "longitude": 106.7934 },
+    { "id": "m-priok", "shortName": "Priok", "name": "Tanjung Priok", "kind": "model", "district": "Jakarta Utara", "latitude": -6.11, "longitude": 106.88 },
+    { "id": "m-cengkareng", "shortName": "Cengkareng", "name": "Cengkareng", "kind": "model", "district": "Jakarta Barat", "latitude": -6.15, "longitude": 106.735 },
+    { "id": "m-cakung", "shortName": "Cakung", "name": "Cakung", "kind": "model", "district": "Jakarta Timur", "latitude": -6.185, "longitude": 106.945 },
+    { "id": "m-pasarminggu", "shortName": "Ps. Minggu", "name": "Pasar Minggu", "kind": "model", "district": "Jakarta Selatan", "latitude": -6.285, "longitude": 106.845 }
+  ],
+
+  "weatherLocations": [
+    { "id": "jakpus", "name": "Jakarta Pusat", "adm4": "31.71.01.1001", "latitude": -6.1767, "longitude": 106.8262 },
+    { "id": "jakut", "name": "Jakarta Utara", "adm4": "31.72.01.1001", "latitude": -6.1258, "longitude": 106.7942 },
+    { "id": "jakbar", "name": "Jakarta Barat", "adm4": "31.73.01.1001", "latitude": -6.1435, "longitude": 106.73 },
+    { "id": "jaksel", "name": "Jakarta Selatan", "adm4": "31.74.01.1001", "latitude": -6.2363, "longitude": 106.8463 },
+    { "id": "jaktim", "name": "Jakarta Timur", "adm4": "31.75.01.1001", "latitude": -6.2087, "longitude": 106.8693 }
+  ]
+}

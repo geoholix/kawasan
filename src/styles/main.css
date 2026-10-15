@@ -1,0 +1,525 @@
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  font-family: var(--calcite-font-family, "Avenir Next", system-ui, sans-serif);
+  background: var(--calcite-color-background);
+  color: var(--calcite-color-text-1);
+}
+
+.stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+arcgis-scene.tool-active {
+  cursor: crosshair;
+}
+arcgis-scene {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- header ---------- */
+.header__controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-inline: 12px;
+}
+.header__indicator {
+  width: 110px;
+}
+
+/* ---------- panels ---------- */
+#panel-start {
+  --calcite-shell-panel-width: 380px;
+}
+#panel-end {
+  --calcite-shell-panel-width: 330px;
+}
+.widget-panel[hidden] {
+  display: none;
+}
+.widget {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+}
+.widget--flush {
+  padding: 0;
+  gap: 0;
+}
+.section-title {
+  font-size: var(--calcite-font-size--1);
+  font-weight: var(--calcite-font-weight-medium);
+  color: var(--calcite-color-text-2);
+  margin-top: 4px;
+}
+.muted {
+  color: var(--calcite-color-text-3);
+}
+.small {
+  font-size: var(--calcite-font-size--2);
+}
+.swatch {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex: none;
+  box-shadow: 0 0 0 1px var(--calcite-color-border-2);
+}
+.value {
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--calcite-font-weight-medium);
+  padding-inline-end: 4px;
+}
+
+/* ---------- summary ---------- */
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.hero__number {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+.hero__value {
+  font-size: 44px;
+  line-height: 1;
+  font-weight: var(--calcite-font-weight-bold);
+  font-variant-numeric: tabular-nums;
+}
+.hero__unit,
+.hero__label {
+  color: var(--calcite-color-text-3);
+  font-size: var(--calcite-font-size--1);
+}
+.hero__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: var(--calcite-font-size--1);
+}
+.hero__weather {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  padding: 8px;
+  border-radius: 6px;
+  background: var(--calcite-color-foreground-2);
+  font-size: var(--calcite-font-size--1);
+}
+.hero__weather calcite-icon,
+.wx__stats calcite-icon {
+  vertical-align: -3px;
+}
+
+/* ---------- weather ---------- */
+.wx {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.wx__card {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid var(--calcite-color-border-3);
+  background: var(--calcite-color-foreground-1);
+}
+.wx__icon {
+  width: 40px;
+  flex: none;
+  display: grid;
+  place-items: center;
+}
+.wx__body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.wx__title {
+  font-weight: var(--calcite-font-weight-medium);
+}
+.wx__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 10px;
+  font-size: var(--calcite-font-size--1);
+}
+
+/* ---------- legend / layers ---------- */
+.legend {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: var(--calcite-font-size--1);
+}
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.block-switch {
+  display: flex;
+  align-items: center;
+  padding-inline: 8px;
+}
+.notes {
+  margin: 0;
+  padding-inline-start: 18px;
+  font-size: var(--calcite-font-size--1);
+  color: var(--calcite-color-text-2);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* ---------- trend table ---------- */
+.trend-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--calcite-font-size--1);
+}
+.trend-table th,
+.trend-table td {
+  padding: 5px 4px;
+  border-bottom: 1px solid var(--calcite-color-border-3);
+  text-align: start;
+}
+.trend-table th {
+  color: var(--calcite-color-text-3);
+  font-weight: var(--calcite-font-weight-medium);
+}
+.trend-table td:nth-child(2) {
+  white-space: nowrap;
+}
+.trend-table .num {
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+.trend-table tbody tr {
+  cursor: pointer;
+}
+.trend-table tbody tr:hover {
+  background: var(--calcite-color-foreground-2);
+}
+.trend-table tr.up calcite-icon {
+  color: var(--calcite-color-status-danger);
+}
+.trend-table tr.down calcite-icon {
+  color: var(--calcite-color-status-success);
+}
+
+/* ---------- wind & trees ---------- */
+.switch-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--calcite-font-size--1);
+}
+.row-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.bulk {
+  display: grid;
+  grid-template-columns: 1fr 110px auto;
+  gap: 6px;
+  align-items: center;
+}
+.plantings {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-height: 160px;
+  overflow: auto;
+  font-size: var(--calcite-font-size--1);
+}
+.planting {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  border-bottom: 1px solid var(--calcite-color-border-3);
+}
+
+/* ---------- emissions ---------- */
+.legend-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.bar {
+  height: 6px;
+  margin-top: 4px;
+  border-radius: 3px;
+  background: var(--calcite-color-foreground-3);
+  overflow: hidden;
+}
+.bar span {
+  display: block;
+  height: 100%;
+  border-radius: 0 3px 3px 0;
+}
+.levers {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* ---------- chart ---------- */
+.chart {
+  position: relative;
+  width: 100%;
+}
+.chart svg {
+  display: block;
+  overflow: visible;
+}
+.chart__grid {
+  stroke: var(--calcite-color-border-3);
+  stroke-width: 1;
+}
+.chart__axis {
+  fill: var(--calcite-color-text-3);
+  font-size: 10px;
+}
+.chart__threshold {
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+  opacity: 0.8;
+}
+.chart__forecast {
+  fill: var(--calcite-color-foreground-3);
+  opacity: 0.5;
+}
+.chart__line {
+  fill: none;
+  stroke: var(--calcite-color-brand);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.chart__line--forecast {
+  stroke-dasharray: 5 4;
+}
+.chart__cursor {
+  stroke: var(--calcite-color-text-1);
+  stroke-width: 1.5;
+}
+.chart__hover {
+  stroke: var(--calcite-color-text-3);
+  stroke-width: 1;
+}
+.chart__dot {
+  fill: var(--calcite-color-brand);
+  stroke: var(--calcite-color-foreground-1);
+  stroke-width: 2;
+}
+.chart__tooltip {
+  position: absolute;
+  top: 0;
+  pointer-events: none;
+  padding: 6px 8px;
+  border-radius: 4px;
+  background: var(--calcite-color-foreground-1);
+  border: 1px solid var(--calcite-color-border-2);
+  box-shadow: var(--calcite-shadow-sm, 0 2px 8px rgb(0 0 0 / 0.2));
+  font-size: var(--calcite-font-size--2);
+  color: var(--calcite-color-text-1);
+  white-space: nowrap;
+}
+.chart__tooltip-time {
+  display: block;
+  color: var(--calcite-color-text-3);
+}
+
+/* ---------- timeline dock ---------- */
+.dock-host[hidden] {
+  display: none;
+}
+.dock-host {
+  display: block;
+  border-top: 1px solid var(--calcite-color-border-3);
+  background: var(--calcite-color-foreground-1);
+}
+.dock {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 16px;
+}
+.dock__controls,
+.dock__options {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+}
+.dock__main {
+  flex: 1;
+  min-width: 0;
+}
+.dock__heading {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.dock__mode {
+  font-size: var(--calcite-font-size--2);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--calcite-color-text-3);
+}
+.dock__time {
+  font-size: var(--calcite-font-size-1);
+  font-weight: var(--calcite-font-weight-medium);
+  font-variant-numeric: tabular-nums;
+}
+.dock__speed {
+  width: 130px;
+}
+.dock__range {
+  width: 250px;
+}
+.dock__range[hidden],
+.dock__options [hidden] {
+  display: none;
+}
+
+/* The boot splash styles live inline in index.html so they apply before this file loads. */
+
+@media (max-width: 900px) {
+  .dock {
+    flex-wrap: wrap;
+  }
+  .dock__main {
+    order: -1;
+    flex-basis: 100%;
+  }
+  .header__controls calcite-segmented-control-item {
+    --calcite-segmented-control-item-text-display: none;
+  }
+}
+
+/* ---------- wind disturbance legend ---------- */
+.wind-legend {
+  position: absolute;
+  right: 16px;
+  bottom: 24px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--calcite-color-foreground-1) 88%, transparent);
+  border: 1px solid var(--calcite-color-border-3);
+  font-size: var(--calcite-font-size--2);
+  color: var(--calcite-color-text-2);
+  pointer-events: none;
+}
+.wind-legend[hidden] {
+  display: none;
+}
+.wind-legend__title {
+  font-weight: var(--calcite-font-weight-medium);
+  color: var(--calcite-color-text-1);
+  margin-bottom: 6px;
+}
+.wind-legend__body {
+  display: flex;
+  gap: 8px;
+}
+.wind-legend__bar {
+  width: 14px;
+  height: 110px;
+  border-radius: 3px;
+}
+.wind-legend__labels {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.wind-gradient {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 6px;
+  align-items: center;
+  font-size: var(--calcite-font-size--2);
+  color: var(--calcite-color-text-3);
+}
+.wind-gradient div {
+  height: 8px;
+  border-radius: 4px;
+}
+.probe[hidden] {
+  display: none;
+}
+
+/* ---------- add data ---------- */
+.widget-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.widget-section[hidden],
+calcite-label[hidden] {
+  display: none;
+}
+.input-row {
+  display: flex;
+  gap: 6px;
+}
+.input-row calcite-input-text {
+  flex: 1;
+}
+.drop-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 16px 12px;
+  border: 1px dashed var(--calcite-color-border-1);
+  border-radius: 6px;
+  color: var(--calcite-color-text-3);
+  font-size: var(--calcite-font-size--1);
+  text-align: center;
+}
+.drop-zone--over {
+  border-color: var(--calcite-color-brand);
+  background: var(--calcite-color-foreground-2);
+  color: var(--calcite-color-text-1);
+}
+.added-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.added-item {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  border-bottom: 1px solid var(--calcite-color-border-3);
+}
+.added-item__text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  font-size: var(--calcite-font-size--1);
+  overflow-wrap: anywhere;
+}
+

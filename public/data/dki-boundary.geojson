@@ -1,0 +1,24 @@
+{
+  "type": "FeatureCollection",
+  "name": "dki-jakarta-daratan-approx",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "DKI Jakarta (daratan)",
+        "note": "Batas perkiraan yang disederhanakan untuk masking permukaan polusi. Ganti dengan batas administrasi resmi (mis. dari Jakarta Satu) untuk analisis."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [106.690, -6.095], [106.740, -6.100], [106.790, -6.105], [106.830, -6.115],
+          [106.880, -6.100], [106.920, -6.095], [106.960, -6.090], [106.975, -6.100],
+          [106.970, -6.150], [106.945, -6.200], [106.950, -6.250], [106.920, -6.300],
+          [106.905, -6.340], [106.880, -6.365], [106.840, -6.370], [106.800, -6.360],
+          [106.770, -6.345], [106.760, -6.310], [106.735, -6.280], [106.720, -6.230],
+          [106.700, -6.200], [106.690, -6.160], [106.685, -6.120], [106.690, -6.095]
+        ]]
+      }
+    }
+  ]
+}

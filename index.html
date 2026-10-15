@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Peta kawasan SCBD dan PIK dalam 3D/2D, dengan digital twin kualitas udara Jakarta: polusi dan cuaca historis, real-time, dan prakiraan." />
+    <title>Peta Kawasan SCBD &amp; PIK</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="./favicon.png" />
+    <link rel="apple-touch-icon" href="./favicon.png" />
+    <script>
+      // OAuth popup callback (redirect URI: <app>/oauth-callback.html). Static hosts without an SPA
+      // fallback should serve this same page at that path, or ship a copy of this script as that file.
+      // The popup hands the result to the opener window, closes, and the app is not started.
+      (function () {
+        if (!/oauth-callback\.html$/.test(location.pathname)) return;
+        window.__oauthCallback = true;
+        var opener = window.opener;
+        if (!opener) return;
+        if (location.hash) opener.dispatchEvent(new CustomEvent("arcgis:auth:hash", { detail: location.hash }));
+        else if (location.search) opener.dispatchEvent(new CustomEvent("arcgis:auth:location:search", { detail: location.search }));
+        window.close();
+      })();
+    </script>
+    <style>
+      .boot {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1.25rem;
+        /* The logo is artwork on white, so the splash stays light in both themes. */
+        background: #fff;
+        color: #38506b;
+        font-size: 0.875rem;
+        z-index: 1000;
+      }
+
+      .boot__logo {
+        width: min(240px, 60vw);
+        height: auto;
+      }
+
+      .boot__bar {
+        position: relative;
+        width: min(220px, 55vw);
+        height: 3px;
+        border-radius: 2px;
+        background: #e3edf3;
+        overflow: hidden;
+      }
+
+      .boot__bar::after {
+        content: "";
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: 40%;
+        border-radius: 2px;
+        background: linear-gradient(90deg, #0b3a73, #2bb5b0);
+        animation: boot-slide 1.2s ease-in-out infinite;
+      }
+
+      .boot__msg {
+        margin: 0;
+        text-align: center;
+        padding: 0 1rem;
+      }
+
+      @keyframes boot-slide {
+        from {
+          transform: translateX(-100%);
+        }
+        to {
+          transform: translateX(250%);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .boot__bar::after {
+          animation: none;
+          width: 100%;
+        }
+      }
+      body {
+        margin: 0;
+        background: #fff;
+      }
+    </style>
+  </head>
+  <body class="calcite-mode-dark">
+    <calcite-shell>
+      <calcite-navigation slot="header">
+        <calcite-navigation-logo slot="logo" icon="map" heading="Peta Kawasan SCBD &amp; PIK"></calcite-navigation-logo>
+        <div slot="content-end" id="header-controls"></div>
+      </calcite-navigation>
+
+      <calcite-shell-panel slot="panel-start" id="panel-start" display-mode="float-content" width="m"></calcite-shell-panel>
+
+      <div class="stage">
+        <arcgis-scene id="scene">
+          <arcgis-zoom slot="top-right"></arcgis-zoom>
+          <arcgis-navigation-toggle slot="top-right"></arcgis-navigation-toggle>
+          <arcgis-compass slot="top-right"></arcgis-compass>
+          <arcgis-home slot="top-right"></arcgis-home>
+        </arcgis-scene>
+        <arcgis-map id="map" class="is-offscreen">
+          <arcgis-zoom slot="top-right"></arcgis-zoom>
+          <arcgis-compass slot="top-right"></arcgis-compass>
+        </arcgis-map>
+      </div>
+
+      <calcite-shell-panel slot="panel-end" id="panel-end" display-mode="float-content" width="m" resizable></calcite-shell-panel>
+
+      <footer slot="footer" id="dock" class="dock-host"></footer>
+    </calcite-shell>
+
+    <div id="notice" class="notice" hidden></div>
+    <div id="config-notice" class="notice notice--config" role="status" hidden></div>
+
+    <div id="boot" class="boot">
+      <img class="boot__logo" src="./logo.png" alt="Indonesia Digital Twin Community" width="240" height="262" />
+      <div class="boot__bar" aria-hidden="true"></div>
+      <p id="boot-msg" class="boot__msg">Memuat peta kawasan SCBD &amp; PIK…</p>
+    </div>
+    <script type="module">
+      if (!window.__oauthCallback) import("/src/main.ts");
+    </script>
+  </body>
+</html>

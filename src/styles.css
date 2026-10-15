@@ -1,0 +1,23 @@
+/* Kawasan additions on top of styles/main.css (the air-quality app styles). */
+
+/* The 3D scene and the 2D map are stacked; the hidden one is either display:none (scene) or
+   laid out but invisible (2D map, so the AI assistant can keep using it while 3D is shown). */
+.stage > arcgis-scene,
+.stage > arcgis-map { position: absolute; inset: 0; width: 100%; height: 100%; }
+.stage > [hidden] { display: none; }
+.stage > .is-offscreen { visibility: hidden; pointer-events: none; }
+
+.notice { position: fixed; left: 50%; bottom: 5.5rem; transform: translateX(-50%); max-width: min(640px, 92vw); z-index: 50;
+  background: var(--calcite-color-foreground-1); color: var(--calcite-color-text-1); border: 1px solid var(--calcite-color-border-1);
+  border-left: 4px solid var(--calcite-color-status-warning); padding: .6rem .9rem; font-size: .8125rem; border-radius: 4px; box-shadow: 0 2px 8px #0003; }
+.notice[hidden] { display: none; }
+.notice--config { bottom: auto; top: 4.5rem; border-left-color: var(--calcite-color-status-danger); cursor: pointer; }
+
+/* AI assistant */
+arcgis-assistant { display: block; height: min(72vh, 600px); }
+.thinking[hidden] { display: none; }
+.thinking { display: flex; align-items: center; gap: .5rem; padding: .5rem .75rem; font-size: .875rem; color: var(--calcite-color-text-2); }
+.thinking__label { font-weight: 500; animation: thinking-pulse 1.4s ease-in-out infinite; }
+.thinking__step { color: var(--calcite-color-text-3); }
+@keyframes thinking-pulse { 50% { opacity: .45; } }
+@media (prefers-reduced-motion: reduce) { .thinking__label { animation: none; } }
