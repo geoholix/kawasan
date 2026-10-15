@@ -13,7 +13,7 @@ import { appConfig } from "./config/app.config";
 import { createRegistry } from "./config/modules";
 import { loadRuntimeConfig, startup } from "./config/runtimeConfig";
 import { areas, config } from "./config";
-import { isSignedIn, setupAuth, signIn } from "./auth";
+import { currentUser, isSignedIn, setupAuth, signIn, signOut } from "./auth";
 import { DataService } from "./core/dataService";
 import type { AppContext } from "./core/modules";
 import { Store, type AppState } from "./core/store";
@@ -171,31 +171,60 @@ function mountKawasanHeader(views: Views, host: HTMLElement, authEnabled: boolea
     wrap.append(b);
   }
 
-  // Web map: try without a prompt (works for public items / an existing OAuth session),
-  // otherwise offer an explicit "Masuk ArcGIS" button.
+  // Login menu: always in the header. Signed out → "Masuk ArcGIS"; signed in → username + "Keluar".
+  // The web map is first tried without a prompt (public item / restored OAuth session).
   const notice = document.getElementById("notice")!;
   const signInBtn = document.createElement("calcite-button");
   signInBtn.scale = "s";
-  signInBtn.iconStart = "user";
-  signInBtn.hidden = true;
+  signInBtn.iconStart = "sign-in";
   signInBtn.textContent = "Masuk ArcGIS";
-  wrap.append(signInBtn);
+
+  const userMenu = document.createElement("calcite-dropdown");
+  userMenu.placement = "bottom-end";
+  userMenu.hidden = true;
+  const userBtn = document.createElement("calcite-button");
+  userBtn.slot = "trigger";
+  userBtn.scale = "s";
+  userBtn.appearance = "outline";
+  userBtn.iconStart = "user";
+  userBtn.iconEnd = "chevron-down";
+  const group = document.createElement("calcite-dropdown-group");
+  const signOutItem = document.createElement("calcite-dropdown-item");
+  signOutItem.iconStart = "sign-out";
+  signOutItem.textContent = "Keluar";
+  signOutItem.addEventListener("click", () => signOut());
+  group.append(signOutItem);
+  userMenu.append(userBtn, group);
+
+  wrap.append(signInBtn, userMenu);
   host.append(wrap);
+
+  const renderAuth = () => {
+    const user = currentUser();
+    signInBtn.hidden = !!user;
+    userMenu.hidden = !user;
+    userBtn.textContent = user ?? "";
+  };
 
   const refresh = async () => {
     await views.loadWebmap();
+    renderAuth();
     if (!views.webmapError) {
       notice.hidden = true;
-      signInBtn.hidden = true;
       return;
     }
     notice.hidden = false;
     notice.textContent = authEnabled
       ? `Web map "Analisis Kawasan PIK dan SCBD" bersifat privat (${views.webmapError}). Klik "Masuk ArcGIS" untuk memuatnya.`
       : `Web map "Analisis Kawasan PIK dan SCBD" belum bisa dimuat (${views.webmapError}). Isi ARCGIS_CLIENT_ID di .env untuk login OAuth, atau bagikan item ke publik.`;
-    signInBtn.hidden = !authEnabled;
   };
   signInBtn.addEventListener("click", async () => {
+    if (!authEnabled) {
+      notice.hidden = false;
+      notice.textContent =
+        "Login belum dikonfigurasi: isi ARCGIS_CLIENT_ID di .env (lalu restart npm run dev) atau kawasan.oauthClientId di public/config.json.";
+      return;
+    }
     signInBtn.loading = true;
     try {
       await signIn();
@@ -207,6 +236,7 @@ function mountKawasanHeader(views: Views, host: HTMLElement, authEnabled: boolea
       signInBtn.loading = false;
     }
   });
+  renderAuth();
   void (async () => {
     if (authEnabled && (await isSignedIn())) await signIn().catch(() => undefined);
     await refresh();

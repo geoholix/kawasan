@@ -49,6 +49,18 @@ export async function isSignedIn(): Promise<boolean> {
   }
 }
 
+/** Username of the current ArcGIS session, or null when signed out. */
+export function currentUser(): string | null {
+  return IdentityManager.findCredential(sharingUrl())?.userId || null;
+}
+
+/** Ends the session (this tab) and reloads so every layer and the assistant start anonymous again. */
+export function signOut(): void {
+  IdentityManager.destroyCredentials();
+  sessionStorage.removeItem(SESSION_KEY);
+  window.location.reload();
+}
+
 /** Opens the OAuth popup (call from a click handler so it is not blocked). */
 export async function signIn(): Promise<void> {
   esriConfig.request.useIdentity = true;
